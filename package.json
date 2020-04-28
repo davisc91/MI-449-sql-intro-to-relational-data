@@ -1,0 +1,17 @@
+{
+  "name": "api-project",
+  "version": "1.0.0",
+  "scripts": {
+    "server": "cross-env DATABASE_URL='postgres://smqwkjddtvolgh:cfc2f46ed8235391a9d8264c977b2dea226d27abf8b470bf2b40a617b713a1aa@ec2-18-206-84-251.compute-1.amazonaws.com:5432/dfa091j4pftgd8' nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "pg": "^8.0.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "nodemon": "^1.11.0"
+  }
+}
