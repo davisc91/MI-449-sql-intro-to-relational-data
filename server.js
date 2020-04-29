@@ -29,7 +29,7 @@ app.get('/todos', async function (request, response) {
 app.get('/todos/:id', async function (request, response) {
   var client = await pool.connect()
   var result = await client.query(
-    'select * from todo where id = $1',
+    'select * from todos where id = $1',
     [request.params.id]
   )
   if (result.rows.length === 1) {
@@ -49,7 +49,7 @@ app.post('/todos', async function (request, response) {
 
   var client = await pool.connect()
   var result = await client.query(
-    'insert into todo (slug, description, completed) values ($1, $2, $3) returning *',
+    'insert into todos (slug, description, completed) values ($1, $2, $3) returning *',
     [slug, description, completed]
   )
   var id = result.rows[0].id
@@ -60,12 +60,12 @@ app.post('/todos', async function (request, response) {
 app.delete('/todos/:id', async function (request, response) {
   var client = await pool.connect()
   var result = await client.query(
-    'select * from todo where id = $1',
+    'select * from todos where id = $1',
     [request.params.id]
   )
   if (result.rows.length > 0) {
     await client.query(
-      'delete from todo where id = $1',
+      'delete from todos where id = $1',
       [request.params.id]
     )
     response.redirect('/todos')
@@ -95,7 +95,7 @@ app.put('/todos/:id', async function (request, response) {
 
   var client = await pool.connect()
   var result = await client.query(
-    'update todo set slug = $2, description = $3, completed = $4 where id = $1 returning *',
+    'update todos set slug = $2, description = $3, completed = $4 where id = $1 returning *',
     [id, slug, description, completed]
   )
   if (result.rows.length === 1) {
